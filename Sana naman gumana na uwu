@@ -1,0 +1,77 @@
+
+import java.util.Scanner;
+
+public class Word {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to Zen and Era Bus Tours");
+        System.out.println("-----------");
+        System.out.println("Enter name: ");
+        String i = scanner.nextLine();
+        System.out.println("Enter age: ");
+        int age = Integer.parseInt(scanner.nextLine());
+        String choice;
+        System.out.println("Choose a class suite: (Type A , B or Ordinary)");
+        System.out.println("A = Php 45,000 (Amenities: include may kabebe time ka sa bus)");
+        System.out.println("B = Php 30,000 (Amenities :May katabi kang chinita short hair with glasses)");
+        System.out.println("Ordinary = Php 17,000: (Amenities: Wala , dun ka sa cr ,alaws arep AHAHHA )");
+        do {
+            choice = scanner.nextLine();
+
+            if (choice.equalsIgnoreCase("a")) {
+                System.out.println("You chose class A!");
+            } else if (choice.equalsIgnoreCase("b")) {
+                System.out.println("You chose class B!");
+            } else if (choice.equalsIgnoreCase("Ordinary")) {
+                System.out.println("You chose class Ordinary!");
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        } while (!choice.equalsIgnoreCase("a") && !choice.equalsIgnoreCase("b") && !choice.equalsIgnoreCase("Ordinary"));
+        System.out.println("Enter destination: ");
+        String destination = scanner.nextLine();
+        System.out.println("Enter payment amount: ");
+        int payment = Integer.parseInt(scanner.nextLine());
+        int senior = 0;
+        if (age < 18) {
+            System.out.println("You are a minor");
+        } else if (age >= 18 && age < 60) {
+            System.out.println("You are an adult");
+        } else {
+            System.out.println("You are a Senior Citizen (20% Discount)");
+            senior++;
+        }
+
+        // Calculate the fare based on the chosen class
+        int fare = 0;
+        switch (choice.toLowerCase()) {
+            case "a":
+                fare = 45000;
+                break;
+            case "b":
+                fare = 30000;
+                break;
+            case "ordinary":
+                fare = 17000;
+                break;
+        }
+
+        // Apply the discount for Senior Citizens
+        double discountedPrice = fare;
+        if (senior == 1) {
+            System.out.println("Senior Citizen discount applied: 20%");
+            discountedPrice = fare - (fare * 0.2);
+        }
+
+        // Check if payment is sufficient
+        if (payment >= discountedPrice) {
+            double change = payment - discountedPrice;
+            System.out.println("Enjoy your Ride! Mr/Mrs " + i + " and Here's your Change: Php" + change);
+            System.out.println("Final Price after discount: Php" + discountedPrice);
+            System.out.println("Arriving soon to your destination:" + destination);
+        } else {
+            System.out.println("Insufficient payment. Please pay the exact amount or more.");
+        }
+    }
+}
